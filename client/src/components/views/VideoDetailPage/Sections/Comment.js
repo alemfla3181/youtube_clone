@@ -1,12 +1,14 @@
 import Axios from 'axios'
+import {Button, Input } from 'antd';
 import React,{useState, useEffect} from 'react'
 import {useSelector} from 'react-redux';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 
+const { TextArea } = Input;
+
 function Comment(props) {
 
-    const videoId = props.postId;
     const user= useSelector(state=> state.user);
     const [commentValue, setcommentValue] = useState("")
 
@@ -21,7 +23,7 @@ function Comment(props) {
         const variables ={
             content: commentValue,
             writer: user.userData._id,
-            postId: videoId
+            postId: props.postId
         }
 
         Axios.post('/api/comment/saveComment', variables)
@@ -47,8 +49,8 @@ function Comment(props) {
             {props.commentLists && props.commentLists.map((comment, index)=>(
                 (!comment.responseTo &&
                 <React.Fragment>
-                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId} refreshFunction={props.refreshFunction}/>
-                    <ReplyComment parentCommentId={comment._id} postId={videoId} commentLists={props.commentLists} refreshFunction={props.refreshFunction}/>
+                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={props.postId} />
+                    <ReplyComment parentCommentId={comment._id} postId={props.postId} commentLists={props.commentLists} refreshFunction={props.refreshFunction}/>
                 </React.Fragment>
                 )
             ))}
@@ -59,7 +61,7 @@ function Comment(props) {
 
             { /* Root Comment Form */ }
             <form style={{display: 'flex'}} onSubmit={onSubmit}>
-                <textarea
+                <TextArea
                     style={{width: '100%', borderRadius: '5px'}}
                     onChange={handleClick}
                     value={commentValue}
@@ -67,7 +69,7 @@ function Comment(props) {
 
                 />
                 <br />
-                <button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</button>
+                <Button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</Button>
             </form>
         </div>
     )
