@@ -47,8 +47,8 @@ function Comment(props) {
             {props.commentLists && props.commentLists.map((comment, index)=>(
                 (!comment.responseTo &&
                 <React.Fragment>
-                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId}/>
-                    <ReplyComment parentCommentId={comment._id} postId={videoId} commentLists={props.commentLists}/>
+                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId} refreshFunction={props.refreshFunction}/>
+                    <ReplyComment parentCommentId={comment._id} postId={videoId} commentLists={props.commentLists} refreshFunction={props.refreshFunction}/>
                 </React.Fragment>
                 )
             ))}
