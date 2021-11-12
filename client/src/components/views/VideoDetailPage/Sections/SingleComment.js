@@ -36,6 +36,7 @@ function SingleComment(props) {
             if(response.data.success){
                 console.log(response.data.result)
                 setCommentValue("")
+                setOpenReply(false)
                 props.refreshFunction(response.data.result)
             }else{
                 alert('코맨트 작성 실패')
