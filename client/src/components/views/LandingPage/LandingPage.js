@@ -23,6 +23,12 @@ function LandingPage() {
         })
     }, [])
 
+    const onDelete = (e) => {
+        if(window.confirm("Delete?")){
+            <div key = {video._id}
+        }
+    }
+
     const renderCards = Video.map((video, index)=> {
 
         var minutes = Math.floor(video.duration / 60);
@@ -47,6 +53,7 @@ function LandingPage() {
                     />
                     <span>{video.writer.name}</span> <br/>
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
+                    <button style={{width: '40%', height: '22px'}} onClick={onDelete}>Delete</button>
                 </Col>
     })
 
