@@ -23,11 +23,11 @@ function LandingPage() {
         })
     }, [])
 
-    const onDelete = (e) => {
-        if(window.confirm("Delete?")){
-            <div key = {video._id}
-        }
-    }
+    // const onDelete = (e) => {
+    //     if(window.confirm("Delete?")){
+    //         <div key = {video._id}
+    //     }
+    // }
 
     const renderCards = Video.map((video, index)=> {
 
