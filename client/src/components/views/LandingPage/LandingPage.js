@@ -23,30 +23,9 @@ function LandingPage(props) {
         })
     }, [])
 
-    const onDelete = () => {
-
-        let videoValuable = {
-            writer: props.writer,
-            title: props.title,
-            description: props.description,
-            privacy: props.privacy,
-            filePath: props.filePath,
-            category: props.category,
-            views: props.views,
-            duration: props.duration,
-            thumbnail: props.thumbnail
-        }
-
-        Axios.post('/api/video/onDelete', videoValuable)
-        .then(response=>{
-            if(response.data.success){
-                console.log(response.data.success) 
-                setVideo(response.data.videoValuable)
-            }else{
-                alert('비디오 삭제 실패')
-            }
-        })
-        
+    const onDelete = (id) => {
+        setVideo(Video.filter(video => video.id !== id))
+        console.log(id)
     }
 
     const renderCards = Video.map((video, index)=> {
