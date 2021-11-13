@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { Video } = require("../models/Video");
-
 const { auth } = require("../middleware/auth");
 const multer = require("multer");
 var ffmpeg = require("fluent-ffmpeg");
+
+const { Video } = require("../models/Video");
 const { Subscriber } = require('../models/Subscriber');
+const { response } = require('express');
 
 
 let storage = multer.diskStorage({
@@ -51,6 +52,28 @@ router.post('/uploadVideo', (req, res) => {
     })
 })
 
+router.post('/onDelete', (req, res) => {
+    const video = new Video(req.body)
+
+    Video.findOneAndDelete({
+        writer: req.body.writer,
+        title: req.body.title,
+        description: req.body.description,
+        privacy: req.body.privacy,
+        filePath: req.body.filePath,
+        category: req.body.category,
+        views: req.body.views,
+        duration: req.body.duration,
+        thumbnail: req.body.thumbnail
+    })
+    .exec((err, video)=>{
+    if(err) return res.status(400).json({success: false, err});
+    res.status(200).json({success: true, video})
+    })
+})
+
+
+
 router.post('/getSubscriptionVideos', (req, res) => {
     //자신의 아이디를 가지고 구독하는 사람들을 찾는다.
     Subscriber.find({userFrom: req.body.userFrom})
@@ -70,11 +93,8 @@ router.post('/getSubscriptionVideos', (req, res) => {
             if(err) return res.status(400).send(err);
             res.status(200).json({success: true, videos})
         })
-    })
-
-    
+    })  
 })
-
 
 router.get('/getVideos', (req, res) => {
     //비디오를 DB에서 가져와 클라이언트에 보낸다.
@@ -84,7 +104,6 @@ router.get('/getVideos', (req, res) => {
             if(err) return res.status(400).send(err);
             res.status(200).json({success: true, videos})
         })
-
 })
 
 router.post('/getVideoDetail', (req, res) => {

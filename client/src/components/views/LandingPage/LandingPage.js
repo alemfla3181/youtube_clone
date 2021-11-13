@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {Card, Icon, Avatar, Col, Typography, Row} from 'antd';
+import {Card, Icon, message, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
 import { FaCode } from "react-icons/fa";
 import moment from 'moment';
@@ -7,7 +7,7 @@ import moment from 'moment';
 const {Title} = Typography;
 const {Meta} = Card;
 
-function LandingPage() {
+function LandingPage(props) {
 
     const [Video, setVideo] = useState([])
 
@@ -23,21 +23,40 @@ function LandingPage() {
         })
     }, [])
 
-    // const onDelete = (e) => {
-    //     if(window.confirm("Delete?")){
-    //         <div key = {video._id}
-    //     }
-    // }
+    const onDelete = () => {
+
+        let videoValuable = {
+            writer: props.writer,
+            title: props.title,
+            description: props.description,
+            privacy: props.privacy,
+            filePath: props.filePath,
+            category: props.category,
+            views: props.views,
+            duration: props.duration,
+            thumbnail: props.thumbnail
+        }
+
+        Axios.post('/api/video/onDelete', videoValuable)
+        .then(response=>{
+            if(response.data.success){
+                console.log(response.data.success) 
+                setVideo(response.data.videoValuable)
+            }else{
+                alert('비디오 삭제 실패')
+            }
+        })
+        
+    }
 
     const renderCards = Video.map((video, index)=> {
-
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor((video.duration - minutes * 60));
 
         return  <Col key={index} lg={6} md={8} xs={24}>
                     <a href={`/video/${video._id}`}>
                         <div style={{position: 'relative'}}>
-                            <img style={{width: '100%'}} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
+                        <img style={{width: '100%'}} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
                             <div className="duration">
                                 <span>{minutes}분 {seconds}초</span>
                             </div>
@@ -65,8 +84,6 @@ function LandingPage() {
             <Row gutter={[32, 16]}>
                 {renderCards}
                 
-
-
             </Row>
         </div>
     )
