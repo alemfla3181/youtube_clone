@@ -24,8 +24,7 @@ function LandingPage(props) {
     }, [])
 
     const onDelete = (id) => {
-        setVideo(Video.filter(video => video.id !== id))
-        console.log(id)
+        console.log(Video.map())
     }
 
     const renderCards = Video.map((video, index)=> {
@@ -51,7 +50,8 @@ function LandingPage(props) {
                     />
                     <span>{video.writer.name}</span> <br/>
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
-                    <button style={{width: '40%', height: '22px'}} onClick={onDelete}>Delete</button>
+                    <button style={{width: '40%', height: '22px'}} 
+                    onClick={onDelete}>Delete</button>
                 </Col>
     })
 
