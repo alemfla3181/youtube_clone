@@ -82,6 +82,15 @@ router.get('/getVideos', (req, res) => {
         })
 })
 
+router.post('/removeVideo', (req, res)=> {
+
+    Video.findOneAndDelete(req.body._id)
+    .exec((err, videos)=>{
+        if(err) return res.status(400).send(err);
+        return res.status(200).json({success:true, videos})
+    })
+})
+
 router.post('/getVideoDetail', (req, res) => {
     Video.findOne({"_id": req.body.videoId})
     .populate('writer')

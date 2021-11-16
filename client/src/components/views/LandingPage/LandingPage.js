@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import {Card, Icon, message, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
-import { FaCode } from "react-icons/fa";
 import moment from 'moment';
 
 const {Title} = Typography;
@@ -23,13 +22,26 @@ function LandingPage(props) {
         })
     }, [])
 
-    const onDelete = (id) => {
-        console.log(Video.map())
-    }
-
     const renderCards = Video.map((video, index)=> {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor((video.duration - minutes * 60));
+
+        const onDelete = (id) => {
+            if(window.confirm('삭제하시겠습니까?')){
+                console.log(id)
+                setVideo(Video.filter(video=> {
+                    return video._id !== id
+                }))
+                Axios.post('/api/video/removeVideo')
+                .then(response=>{
+                    if(response.data.success){
+                        console.log(response.data.videos)
+                    }else{
+                        alert('비디오 삭제를 실패하였습니다.')
+                    }
+                })
+            }
+        }
 
         return  <Col key={index} lg={6} md={8} xs={24}>
                     <a href={`/video/${video._id}`}>
@@ -51,7 +63,7 @@ function LandingPage(props) {
                     <span>{video.writer.name}</span> <br/>
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
                     <button style={{width: '40%', height: '22px'}} 
-                    onClick={onDelete}>Delete</button>
+                    onClick={() => onDelete(video._id)}>Delete</button>
                 </Col>
     })
 
