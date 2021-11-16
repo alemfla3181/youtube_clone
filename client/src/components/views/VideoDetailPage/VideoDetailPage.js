@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import {Row, Col, List, Avatar } from 'antd';
+import {Row, Col, List, Avatar,Button} from 'antd';
 import Axios from 'axios';
 import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscribe';
@@ -60,7 +60,7 @@ function VideoDetailPage(props) {
                             </List.Item>
 
                             {/* Comments */}
-                            <Comment refreshFunction={refreshFunction} commentLists={Comments} postId={VideoDetail._id} />
+                            <Comment refreshFunction={refreshFunction} commentLists={Comments} setComments={setComments} postId={VideoDetail._id} />
                     </div>
 
                 </Col>

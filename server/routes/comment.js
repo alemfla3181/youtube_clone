@@ -9,7 +9,7 @@ const {Comment} = require("../models/Comment");
 //=================================
 
 router.post('/saveComment', (req, res) => {
-
+    console.log(req.body)
     const comment = new Comment(req.body)
     comment.save((err, comment)=>{
         if(err) return res.json({success: false, err});
@@ -32,4 +32,12 @@ router.post('/getComments', (req, res) => {
     })
 })
 
+router.post('/RemoveComment', (req, res) => {
+    console.log(req.body)
+    Comment.findOneAndDelete({'_id': req.body.responseTo})
+    .exec((err, result)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).json({success: true, result})
+    })
+})
 module.exports = router;

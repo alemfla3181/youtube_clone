@@ -43,11 +43,35 @@ function SingleComment(props) {
                 alert('코맨트 작성 실패')
             }
         })
+    }
 
+    const onRemove = (id) => {
+        const variables ={
+            content: CommentValue,
+            writer: user.userData._id,
+            postId: props.postId,
+            responseTo: id
+        }
+        console.log(id)
+
+        if(window.confirm('삭제하시겠습니까?')){
+            props.setComments(props.commentLists.filter(comment=>{
+                return comment._id !== id
+            }))
+            Axios.post('/api/comment/RemoveComment', variables)
+            .then(response=> {
+                if(response.data.success){
+
+                }else{
+                    alert('comment삭제 실패')
+                }
+            })
+        }
     }
 
     return (
         <div>
+            <Button style={{ width: '10%', height: '30px', backgroundColor: 'orange'}} onClick={() => onRemove(props.comment._id)}>Delete</Button>
             <Comment 
                 actions={actions}
                 author={props.comment.writer.name}
@@ -66,7 +90,6 @@ function SingleComment(props) {
                 <br />
                 <button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</button>
             </form>
-            
             }
         </div>
     )

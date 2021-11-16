@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {Card, Icon, message, Avatar, Col, Typography, Row} from 'antd';
+import {Card, Button, message, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
 import moment from 'moment';
 
@@ -28,7 +28,6 @@ function LandingPage(props) {
 
         const onDelete = (id) => {
             if(window.confirm('삭제하시겠습니까?')){
-                console.log(id)
                 setVideo(Video.filter(video=> {
                     return video._id !== id
                 }))
@@ -62,8 +61,8 @@ function LandingPage(props) {
                     />
                     <span>{video.writer.name}</span> <br/>
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
-                    <button style={{width: '40%', height: '22px'}} 
-                    onClick={() => onDelete(video._id)}>Delete</button>
+                    <Button style={{width: '40%', height: '22px'}} 
+                    onClick={() => onDelete(video._id)}>Delete</Button>
                 </Col>
     })
 
