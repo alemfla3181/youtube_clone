@@ -33,7 +33,7 @@ router.post('/getComments', (req, res) => {
 })
 
 router.post('/RemoveComment', (req, res) => {
-    console.log(req.body)
+    //console.log(req.body)
     Comment.findOneAndDelete({'_id': req.body.responseTo})
     .exec((err, result)=>{
         if(err) return res.status(400).send(err);

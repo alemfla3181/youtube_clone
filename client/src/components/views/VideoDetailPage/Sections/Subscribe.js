@@ -33,7 +33,6 @@ function Subscribe(props) {
     }, [])
 
     const onSubscribe = () => {
-
         let subscribedVariable = {
             userTo: props.userTo,
             userFrom: props.userFrom 
@@ -41,7 +40,6 @@ function Subscribe(props) {
 
         //이미 구독중
         if(Subscribed){
-
             Axios.post('/api/subscribe/unSubscribe', subscribedVariable)
             .then(response=>{
                 if(response.data.success){

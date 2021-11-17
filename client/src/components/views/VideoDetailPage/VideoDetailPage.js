@@ -42,7 +42,6 @@ function VideoDetailPage(props) {
     }
 
     if(VideoDetail.writer){
-
         const subscribeButton = VideoDetail.writer._id !== localStorage.getItem('userId') && <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>
         return (
             <Row gutter={[16,16]}>
@@ -60,7 +59,7 @@ function VideoDetailPage(props) {
                             </List.Item>
 
                             {/* Comments */}
-                            <Comment refreshFunction={refreshFunction} commentLists={Comments} setComments={setComments} postId={VideoDetail._id} />
+                            <Comment refreshFunction={refreshFunction} commentLists={Comments} setComments={setComments} postId={VideoDetail._id} userTo={VideoDetail.writer._id}/>
                     </div>
 
                 </Col>

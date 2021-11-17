@@ -35,7 +35,7 @@ function SingleComment(props) {
         Axios.post('/api/comment/saveComment', variables)
         .then(response=>{
             if(response.data.success){
-                console.log(response.data.result)
+               // console.log(response.data.result)
                 setCommentValue("")
                 setOpenReply(false)
                 props.refreshFunction(response.data.result)
@@ -47,9 +47,6 @@ function SingleComment(props) {
 
     const onRemove = (id) => {
         const variables ={
-            content: CommentValue,
-            writer: user.userData._id,
-            postId: props.postId,
             responseTo: id
         }
         console.log(id)
@@ -69,9 +66,10 @@ function SingleComment(props) {
         }
     }
 
-    return (
+    // if(localStorage.getItem('userId') === props.userTo)
+    return (   
         <div>
-            <Button style={{ width: '10%', height: '30px', backgroundColor: 'orange'}} onClick={() => onRemove(props.comment._id)}>Delete</Button>
+            <Button style={{ width: '10%', height: '30px', backgroundColor: 'orange', position: 'absolute', zIndex: '1', marginLeft: '75%'}} onClick={() => onRemove(props.comment._id)}>Delete</Button>
             <Comment 
                 actions={actions}
                 author={props.comment.writer.name}
@@ -93,6 +91,6 @@ function SingleComment(props) {
             }
         </div>
     )
-}
+}   
 
 export default SingleComment
