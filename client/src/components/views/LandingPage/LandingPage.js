@@ -1,13 +1,14 @@
 import Axios from 'axios';
 import {Card, Button, message, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
+import {useSelector} from 'react-redux';
 import moment from 'moment';
 
 const {Title} = Typography;
 const {Meta} = Card;
 
 function LandingPage(props) {
-
+    const user = useSelector(state=> state.user);
     const [Video, setVideo] = useState([])
 
     useEffect(() => {
@@ -61,7 +62,7 @@ function LandingPage(props) {
                     />
                     <span>{video.writer.name}</span> <br />                    
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
-                    {localStorage.getItem('userId') === video.writer._id && 
+                    {user.userData._id === video.writer._id &&  // 로그인한 유저가 비디오 업로드한 유저일경우 삭제 버튼 활성화
                         <Button style={{width: '30%', height: '22px', marginLeft: '70%'}} 
                         onClick={() => onDelete(video._id)}>Delete</Button>
                     }

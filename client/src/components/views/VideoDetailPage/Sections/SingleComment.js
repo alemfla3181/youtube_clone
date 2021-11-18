@@ -66,10 +66,8 @@ function SingleComment(props) {
         }
     }
 
-    console.log("현재 로그인 아이디:",localStorage.getItem('userId'))
-    console.log("comment.writer._id:", props.comment.writer._id)
     return (   
-        <div>{ localStorage.getItem('userId') === props.comment.writer._id &&
+        <div>{ user.userData._id === props.comment.writer._id && // 로그인한 유저가 댓글을 작성한 유저일경우 삭제 버튼 활성화
             <Button style={{ width: '10%', height: '30px', backgroundColor:     'orange', position: 'absolute', zIndex: '1', marginLeft: '75%'}}    onClick={() => onRemove(props.comment._id)}>Delete</Button> }
             <Comment 
                 actions={actions}
@@ -77,7 +75,7 @@ function SingleComment(props) {
                 avatar={<Avatar src={props.comment.writer.image } alt/>}
                 content={ <p>{props.comment.content}</p>}
                 />
-            {OpenReply &&
+            {OpenReply && user.userData.isAuth &&
                 <form style={{display: 'flex'}} onSubmit={onSubmit}>
                 <TextArea
                     style={{width: '100%', borderRadius: '5px'}}

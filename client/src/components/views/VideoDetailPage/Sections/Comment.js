@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import {auth} from '../../../../_actions/user_actions';
 import {Button, Input } from 'antd';
 import React,{useState, useEffect} from 'react'
 import {useSelector} from 'react-redux';
@@ -59,6 +60,7 @@ function Comment(props) {
 
 
             { /* Root Comment Form */ }
+            {user.userData.isAuth &&  // 로그인시에만 댓글 작성 가능
             <form style={{display: 'flex'}} onSubmit={onSubmit}>
                 <TextArea
                     style={{width: '100%', borderRadius: '5px'}}
@@ -68,6 +70,7 @@ function Comment(props) {
                 />
                 <Button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</Button>
             </form>
+            }
         </div>
     )
 }
