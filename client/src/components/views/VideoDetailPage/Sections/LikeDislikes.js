@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import {Tooltip, Icon} from 'antd';
 import Axios from 'axios';
+import {useSelector} from 'react-redux';
 
 function LikeDislikes(props) {
-
+    const user= useSelector(state=> state.user);
     const [Likes, setLikes] = useState(0)
     const [Dislikes, setDislikes] = useState(0)
     const [LikeAction, setLikeAction] = useState(null)
@@ -55,60 +56,76 @@ function LikeDislikes(props) {
     }, [])
 
     const onLike = () => {
-        if(LikeAction === null){
-            Axios.post('/api/like/upLike', variable)
-            .then(response => {
-                if(response.data.success){
-                    setLikes(Likes + 1)
-                    setLikeAction('liked')
-
-                    if(DisLikeAction !== null) {
-                        setDisLikeAction(null)
-                        setDislikes(Dislikes -1)
-                    }
+        if(user.userData.isAuth){
+            if(user.userData._id !== props.writerId){
+                if(LikeAction === null){
+                    Axios.post('/api/like/upLike', variable)
+                    .then(response => {
+                        if(response.data.success){
+                            console.log(user.userData._id, props.writerId)
+                            setLikes(Likes + 1)
+                            setLikeAction('liked')
+                            if(DisLikeAction !== null) {
+                                setDisLikeAction(null)
+                                setDislikes(Dislikes -1)
+                            }
+                        }else{
+                            alert('Like를 올리지 못했습니다.')
+                        }
+                    })
                 }else{
-                    alert('Like를 올리지 못했습니다.')
+                    Axios.post('/api/like/unLike', variable)
+                    .then(response => {
+                        if(response.data.success){
+                            setLikes(Likes - 1)
+                            setLikeAction(null)
+                        }else{
+                            alert('Like를 내리지 못했습니다.')
+                        }
+                    })
                 }
-            })
+            }else{
+                window.confirm('your...')
+            }
         }else{
-            Axios.post('/api/like/unLike', variable)
-            .then(response => {
-                if(response.data.success){
-                    setLikes(Likes - 1)
-                    setLikeAction(null)
-                }else{
-                    alert('Like를 내리지 못했습니다.')
-                }
-            })
+            window.confirm('login plz')
         }
     }
 
     const onDislike = () => {
-        if(DisLikeAction !== null){
-            Axios.post('/api/like/unDislike', variable)
-            .then(response => {
-                if(response.data.success){
-                    setDislikes(Dislikes - 1)
-                    setDisLikeAction(null)
+        if(user.userData.isAuth){
+            if( user.userData._id !== props.writerId){
+                if(DisLikeAction !== null){
+                    Axios.post('/api/like/unDislike', variable)
+                    .then(response => {
+                        if(response.data.success){
+                            setDislikes(Dislikes - 1)
+                            setDisLikeAction(null)
+                        }else{
+                            alert('dislike를 지우지 못했습니다.')
+                        }
+                    })
                 }else{
-                    alert('dislike를 지우지 못했습니다.')
+                    Axios.post('/api/like/upDislike', variable)
+                    .then(response => {
+                        if(response.data.success){
+                            setDislikes(DisLikeAction + 1)
+                            setDisLikeAction('disliked')
+                            
+                            if(LikeAction !== null){
+                                setLikeAction(null)
+                                setLikes(Likes - 1)
+                            }
+                        }else{
+                            alert('dislike를 지우지 못했습니다.')
+                        }
+                    })
                 }
-            })
+            }else{
+                window.confirm('your...')
+            }
         }else{
-            Axios.post('/api/like/upDislike', variable)
-            .then(response => {
-                if(response.data.success){
-                    setDislikes(DisLikeAction + 1)
-                    setDisLikeAction('disliked')
-                    
-                    if(LikeAction !== null){
-                        setLikeAction(null)
-                        setLikes(Likes - 1)
-                    }
-                }else{
-                    alert('dislike를 지우지 못했습니다.')
-                }
-            })
+            window.confirm('login plz')
         }
     }
 

@@ -16,7 +16,7 @@ function SingleComment(props) {
     }
 
     const actions = [
-        <LikeDislikes userId={localStorage.getItem('userId')} commentId={props.comment._id} />, <span onClick={onClickReplyOpen} key="comment-basic-reply-to"> Reply to </span>
+        <LikeDislikes userId={localStorage.getItem('userId')} commentId={props.comment._id} writerId={props.comment.writer._id} />, <span onClick={onClickReplyOpen} key="comment-basic-reply-to"> Reply to </span>
     ]
 
     const onHandleChange = (e) => {

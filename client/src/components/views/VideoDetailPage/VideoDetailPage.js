@@ -5,9 +5,10 @@ import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscribe';
 import Comment from './Sections/Comment';
 import LikeDislikes from './Sections/LikeDislikes';
+import { useSelector } from 'react-redux';
 
 function VideoDetailPage(props) {
-
+    const user = useSelector(state=> state.user);
     const videoId = props.match.params.videoId
     const variable = { videoId: videoId }
 
@@ -42,7 +43,8 @@ function VideoDetailPage(props) {
     }
 
     if(VideoDetail.writer){
-        const subscribeButton = VideoDetail.writer._id !== localStorage.getItem('userId') && <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>
+        const subscribeButton = VideoDetail.writer._id !== user.userData._id && user.userData.isAuth &&  // 로그인시에만 구독버튼 활성화, 자신의 비디오엔 비활성화
+        <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>
         return (
             <Row gutter={[16,16]}>
                 <Col lg={18} xs={24}>
@@ -50,7 +52,7 @@ function VideoDetailPage(props) {
                         <video style={{width: '100%'}} src={`http://localhost:5000/${VideoDetail.filePath}`} controls />
                         
                         <List.Item
-                            actions= {[<LikeDislikes video userId={localStorage.getItem('userId')} videoId={videoId}/>,subscribeButton]}>
+                            actions= {[<LikeDislikes video userId={localStorage.getItem('userId')} videoId={videoId} writerId={VideoDetail.writer._id}/>,subscribeButton]}>
                                 <List.Item.Meta
                                     avatar={<Avatar src={VideoDetail.writer.image}/>}
                                     title={VideoDetail.writer.name}
