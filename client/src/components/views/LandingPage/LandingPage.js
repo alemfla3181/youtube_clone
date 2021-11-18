@@ -59,10 +59,12 @@ function LandingPage(props) {
                         title={video.title}
                         description=""
                     />
-                    <span>{video.writer.name}</span> <br/>
+                    <span>{video.writer.name}</span> <br />                    
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
-                    <Button style={{width: '40%', height: '22px'}} 
-                    onClick={() => onDelete(video._id)}>Delete</Button>
+                    {localStorage.getItem('userId') === video.writer._id && 
+                        <Button style={{width: '30%', height: '22px', marginLeft: '70%'}} 
+                        onClick={() => onDelete(video._id)}>Delete</Button>
+                    }
                 </Col>
     })
 

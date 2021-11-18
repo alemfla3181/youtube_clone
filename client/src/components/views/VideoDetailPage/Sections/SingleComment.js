@@ -66,16 +66,17 @@ function SingleComment(props) {
         }
     }
 
-    // if(localStorage.getItem('userId') === props.userTo)
+    console.log("현재 로그인 아이디:",localStorage.getItem('userId'))
+    console.log("comment.writer._id:", props.comment.writer._id)
     return (   
-        <div>
-            <Button style={{ width: '10%', height: '30px', backgroundColor: 'orange', position: 'absolute', zIndex: '1', marginLeft: '75%'}} onClick={() => onRemove(props.comment._id)}>Delete</Button>
+        <div>{ localStorage.getItem('userId') === props.comment.writer._id &&
+            <Button style={{ width: '10%', height: '30px', backgroundColor:     'orange', position: 'absolute', zIndex: '1', marginLeft: '75%'}}    onClick={() => onRemove(props.comment._id)}>Delete</Button> }
             <Comment 
                 actions={actions}
                 author={props.comment.writer.name}
                 avatar={<Avatar src={props.comment.writer.image } alt/>}
                 content={ <p>{props.comment.content}</p>}
-            />
+                />
             {OpenReply &&
                 <form style={{display: 'flex'}} onSubmit={onSubmit}>
                 <TextArea
