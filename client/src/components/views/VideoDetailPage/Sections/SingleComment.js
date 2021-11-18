@@ -83,9 +83,7 @@ function SingleComment(props) {
                     onChange={onHandleChange}
                     value={CommentValue}
                     placeholder="코멘트를 작성해 주세요"
-
                 />
-                <br />
                 <button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</button>
             </form>
             }

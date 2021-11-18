@@ -65,9 +65,7 @@ function Comment(props) {
                     onChange={handleClick}
                     value={commentValue}
                     placeholder="코멘트를 작성해 주세요"
-
                 />
-                <br />
                 <Button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</Button>
             </form>
         </div>
