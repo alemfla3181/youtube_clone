@@ -35,5 +35,13 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.19.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alemfla3181/youtube_clone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alemfla3181/youtube_clone/issues"
+  },
+  "homepage": "https://github.com/alemfla3181/youtube_clone#readme"
 }
