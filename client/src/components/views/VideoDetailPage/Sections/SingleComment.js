@@ -49,7 +49,7 @@ function SingleComment(props) {
         const variables ={
             responseTo: id
         }
-        console.log(id)
+        //console.log(id)
 
         if(window.confirm('삭제하시겠습니까?')){
             props.setComments(props.commentLists.filter(comment=>{
