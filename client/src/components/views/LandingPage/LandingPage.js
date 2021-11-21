@@ -15,7 +15,7 @@ function LandingPage(props) {
         Axios.get('/api/video/getVideos')
         .then(response=>{
             if(response.data.success){
-                console.log(response.data.videos)
+                //console.log(response.data.videos)
                 setVideo(response.data.videos)
             }else{
                 alert('비디오 가져오기를 실패 했습니다.')
@@ -35,7 +35,7 @@ function LandingPage(props) {
                 Axios.post('/api/video/removeVideo')
                 .then(response=>{
                     if(response.data.success){
-                        console.log(response.data.videos)
+                        //console.log(response.data.videos)
                     }else{
                         alert('비디오 삭제를 실패하였습니다.')
                     }

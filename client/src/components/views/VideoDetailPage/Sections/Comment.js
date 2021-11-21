@@ -30,7 +30,7 @@ function Comment(props) {
         Axios.post('/api/comment/saveComment', variables)
         .then(response=>{
             if(response.data.success){
-                console.log(response.data.result)
+                //console.log(response.data.result)
                 setcommentValue("")
                 props.refreshFunction(response.data.result)
             }else{
