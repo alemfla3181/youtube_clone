@@ -71,6 +71,18 @@ function Comment(props) {
                 <Button style={{width: '20%', height: '52px'}} onClick={onSubmit}>Submit</Button>
             </form>
             }
+             {!user.userData.isAuth &&  // 로그인하지 않음 ㅡ
+            <form style={{display: 'flex'}}>
+                <TextArea
+                    style={{width: '100%', borderRadius: '5px'}}
+                    onChange={handleClick}
+                    //value={commentValue}
+                    placeholder="로그인시에만 작성가능"
+                />
+            </form>
+            }
+
+
         </div>
     )
 }
