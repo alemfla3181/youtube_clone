@@ -3,6 +3,7 @@ import {Card, Button, message, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
 import {useSelector} from 'react-redux';
 import moment from 'moment';
+import SizeContext from 'antd/lib/config-provider/SizeContext';
 
 const {Title} = Typography;
 const {Meta} = Card;
@@ -72,8 +73,11 @@ function LandingPage(props) {
 
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
+            
             <Title level={2}> Recommended </Title>
-            <hr />
+            <div> 
+            <input style={{marginTop:'20px', width:'60%', height: '40%', fontSize:'20px', marginBottom:'20px'}} type="text" placeholder="Search..." />
+            </div>
             <Row gutter={[32, 16]}>
                 {renderCards}
                 
