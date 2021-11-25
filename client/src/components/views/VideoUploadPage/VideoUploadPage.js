@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Typography, Button, Form, message, Input, Icon} from 'antd';
+import {Typography, Button, Form, message, Input} from 'antd';
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const {TextArea} = Input;
 const {Title} = Typography;
@@ -128,7 +129,7 @@ function VideoUploadPage(props){
                     {({getRootProps, getInputProps})=> (
                         <div style={{width: '300px', height: '240px', border:'1px solid lightgray', display:'flex', alignItems:'center', justifyContent:'center'}} {...getRootProps()}>
                             <input {...getInputProps()} />
-                            <Icon type="plus" style={{fontSize:'3rem'}} />
+                            <PlusCircleOutlined />
                         </div>
                     )}
 
