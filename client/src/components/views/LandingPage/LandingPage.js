@@ -1,16 +1,18 @@
 import Axios from 'axios';
-import {Card, Button, Avatar, Col, Typography, Row} from 'antd';
+import {Card, Input, Button, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import {SearchOutlined} from '@ant-design/icons';
 
+const {TextArea} = Input;
 const {Title} = Typography;
 const {Meta} = Card;
 
 function LandingPage(props) {
     const user = useSelector(state=> state.user);
     const [Video, setVideo] = useState([])
+    const [searchKeyword, setsearchKeyword] = useState("")
 
     useEffect(() => {
         Axios.get('/api/video/getVideos')
@@ -24,9 +26,16 @@ function LandingPage(props) {
         })
     }, [])
 
+
+   
     const renderCards = Video.map((video, index)=> {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor((video.duration - minutes * 60));
+
+
+        setVideo(Video.filter(video =>{
+            return video.title.indexOf(searchKeyword) > -1
+        }))
 
         const onDelete = (id) => {
             if(window.confirm('삭제하시겠습니까?')){
@@ -68,15 +77,21 @@ function LandingPage(props) {
                         onClick={() => onDelete(video._id)}>Delete</Button>
                     }
                 </Col>
+                
     })
 
-
+    const onSearch = (e) =>{   
+        setsearchKeyword(e.currentTarget.value)
+        console.log(e.currentTarget.value)
+    }
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
             
             <Title level={2}> Recommended </Title>
             <div style={{marginTop: '20px', marginBottom:'20px'}}> 
-            <input style={{width:'60%', height: '40%', fontSize:'20px'}} type="text" placeholder="Search..." /><Button type="primary" shape="circle" icon={<SearchOutlined />} />
+            <Input style={{width:'60%', height: '40%', fontSize:'20px'}} 
+            value={searchKeyword} onChange={onSearch}
+            type="text" placeholder="Search..." /><Button type="primary" shape="circle" icon={<SearchOutlined />} />
             </div>
             <Row gutter={[32, 16]}>
                 {renderCards}
