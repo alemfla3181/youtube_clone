@@ -3,7 +3,7 @@ import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 import { Drawer, Button } from 'antd';
 import './Sections/Navbar.css';
-import {DownOutlined} from '@ant-design/icons';
+import {RightSquareOutlined} from '@ant-design/icons';
 
 function NavBar() {
   const [visible, setVisible] = useState(false)
@@ -23,16 +23,17 @@ function NavBar() {
       </div>
       <div className="menu__container">
         <div className="menu_left">
-          <LeftMenu mode="horizontal" />
+          <LeftMenu mode="vertical" />
         </div>
-        <div className="menu_rigth">
-          <RightMenu mode="horizontal" />
+        <div className="menu_right">
+          <RightMenu mode="vertical" />
         </div>
         <Button
           className="menu__mobile-button"
           type="primary"
           onClick={showDrawer}
         >
+          <RightSquareOutlined />
         </Button>
         <Drawer
           title="Basic Drawer"
@@ -43,7 +44,7 @@ function NavBar() {
           visible={visible}
         >
           <LeftMenu mode="inline" />
-          <RightMenu mode="inline" />
+          <RightMenu mode="inline" /> 
         </Drawer>
       </div>
     </nav>
