@@ -82,6 +82,19 @@ router.get('/getVideos', (req, res) => {
         })
 })
 
+router.post('/getVideos', (req, res) => {
+    let term = req.body.searchTerm
+
+    //비디오를 DB에서 가져와 클라이언트에 보낸다.
+    Video.find()
+        .find({"title": {$regex:term, '$options': 'i'}})
+        .populate('writer')
+        .exec((err, videos) => {
+            if(err) return res.status(400).send(err);
+            res.status(200).json({success: true, videos})
+        })
+})
+
 router.post('/removeVideo', (req, res)=> {
 
     Video.findOneAndDelete(req.body._id)

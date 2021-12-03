@@ -3,39 +3,51 @@ import {Card, Input, Button, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
 import {useSelector} from 'react-redux';
 import moment from 'moment';
-import {SearchOutlined} from '@ant-design/icons';
+import SearchFeature from './Sections/SearchFeature';
 
-const {TextArea} = Input;
 const {Title} = Typography;
 const {Meta} = Card;
 
 function LandingPage(props) {
     const user = useSelector(state=> state.user);
     const [Video, setVideo] = useState([])
-    const [searchKeyword, setsearchKeyword] = useState("")
+    const [SearchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
         Axios.get('/api/video/getVideos')
-        .then(response=>{
-            if(response.data.success){
-                //console.log(response.data.videos)
-                setVideo(response.data.videos)
-            }else{
-                alert('비디오 가져오기를 실패 했습니다.')
-            }
-        })
+            .then(response => {
+                if (response.data.success) {
+                    //console.log(response.data.videos)
+                    setVideo(response.data.videos)
+                } else {
+                    alert('비디오 가져오기를 실패 했습니다.')
+                }
+            })
     }, [])
 
+    const getVideo = (body) => {
+        Axios.post('/api/video/getVideos', body)
+            .then(response => {
+                if (response.data.success) {
+                    console.log(response.data.videos)
+                    setVideo(response.data.videos)
+                } else {
+                    alert('비디오 가져오기를 실패 했습니다.')
+                }
+            })
+    }
 
-   
+    const updateSearchTerm = (newSearchTerm) => {
+        let body = {
+            searchTerm: newSearchTerm
+        }
+        setSearchTerm(newSearchTerm);
+        getVideo(body)
+    }
+
     const renderCards = Video.map((video, index)=> {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor((video.duration - minutes * 60));
-
-
-        setVideo(Video.filter(video =>{
-            return video.title.indexOf(searchKeyword) > -1
-        }))
 
         const onDelete = (id) => {
             if(window.confirm('삭제하시겠습니까?')){
@@ -80,18 +92,12 @@ function LandingPage(props) {
                 
     })
 
-    const onSearch = (e) =>{   
-        setsearchKeyword(e.currentTarget.value)
-        console.log(e.currentTarget.value)
-    }
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
             
             <Title level={2}> Recommended </Title>
             <div style={{marginTop: '20px', marginBottom:'20px'}}> 
-            <Input style={{width:'60%', height: '40%', fontSize:'20px'}} 
-            value={searchKeyword} onChange={onSearch}
-            type="text" placeholder="Search..." /><Button type="primary" shape="circle" icon={<SearchOutlined />} />
+                <SearchFeature refreshFunction={updateSearchTerm} />
             </div>
             <Row gutter={[32, 16]}>
                 {renderCards}
