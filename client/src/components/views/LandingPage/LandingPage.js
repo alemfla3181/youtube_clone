@@ -85,7 +85,7 @@ function LandingPage(props) {
                     <span>{video.writer.name}</span> <br />                    
                     <span style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM do YY")}</span>
                     {user.userData._id === video.writer._id &&  // 로그인한 유저가 비디오 업로드한 유저일경우 삭제 버튼 활성화
-                        <Button style={{width: '30%', height: '22px', marginLeft: '70%'}} 
+                        <Button type='dashed' style={{height: '7%', float: 'right',fontSize: '0.7rem' , backgroundColor: 'red'}} 
                         onClick={() => onDelete(video._id)}>Delete</Button>
                     }
                 </Col>
