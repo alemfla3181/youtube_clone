@@ -19,7 +19,7 @@ function NavBar() {
     return (
         <nav className="menu" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <div className="menu__logo">
-                <a href="/">Youtub</a>
+                <a href="/"><img src="https://cdn-icons.flaticon.com/png/512/2504/premium/2504848.png?token=exp=1638943792~hmac=b6840c7fd4d63137abeff6e710158a42" width='50%'/></a>
             </div>
             <div className="menu__container">
                 <div className="menu_left">

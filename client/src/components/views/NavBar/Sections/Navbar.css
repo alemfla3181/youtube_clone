@@ -9,15 +9,14 @@
 }
 
 .menu__logo {
-  width: 150px;
+  width: 100px;
   float: left;
   text-transform: uppercase;
 }
 
 .menu__logo a {
   display: inline-block;
-  font-size: 20px;
-  padding: 19px 20px;
+  margin-top: 10px;
 }
 
 .menu__container .ant-menu-item {
@@ -75,6 +74,7 @@
   }
 
   .menu__logo a {
+      margin-top: -5px;
     margin-left: -20px;
   }
 
