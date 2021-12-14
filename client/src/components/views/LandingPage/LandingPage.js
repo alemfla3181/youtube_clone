@@ -8,7 +8,7 @@ import SearchFeature from './Sections/SearchFeature';
 const {Title} = Typography;
 const {Meta} = Card;
 
-function LandingPage(props) {
+function LandingPage() {
     const user = useSelector(state=> state.user);
     const [Video, setVideo] = useState([])
     const [SearchTerm, setSearchTerm] = useState("")
@@ -17,7 +17,7 @@ function LandingPage(props) {
         Axios.get('/api/video/getVideos')
             .then(response => {
                 if (response.data.success) {
-                    //console.log(response.data.videos)
+                    // console.log(response.data.videos)
                     setVideo(response.data.videos)
                 } else {
                     alert('비디오 가져오기를 실패 했습니다.')

@@ -19,7 +19,7 @@ function NavBar() {
     return (
         <nav className="menu" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <div className="menu__logo">
-                <a href="/"><img src="https://cdn-icons.flaticon.com/png/512/2504/premium/2504848.png?token=exp=1638943792~hmac=b6840c7fd4d63137abeff6e710158a42" width='50%'/></a>
+                <a href="/"><img src="https://w.namu.la/s/9a2bd12a2c488026b0c552bd6527248ba60e70bf6e6d07e9c3a7f500fba5a9f0f74cb75a8fcd42babc39fa9abeec697c6dd86cd7c766515834b94b10746f95c87f4d8743802496b925ae19b289aa98882de82e4213eb1b4b20da1840a801387e" width='100%'/></a>
             </div>
             <div className="menu__container">
                 <div className="menu_left">
