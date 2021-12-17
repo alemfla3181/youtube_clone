@@ -45,7 +45,7 @@ function VideoDetailPage(props) {
     if(VideoDetail.writer){
         const subscribeButton = (VideoDetail.writer._id !== user.userData._id) && user.userData.isAuth &&  // 로그인시에만 구독버튼 활성화, 자신의 비디오엔 비활성화
         <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>
-        return (
+        return ( 
             <Row gutter={[16,16]}>
                 <Col lg={18} xs={24}>
                     <div style={{width: '100%', padding:'3rem 4rem'}}>
