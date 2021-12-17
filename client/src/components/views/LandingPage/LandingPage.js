@@ -68,7 +68,7 @@ function LandingPage() {
         return  <Col key={index} lg={6} md={8} xs={24}>
                     <a href={`/video/${video._id}`}>
                         <div style={{position: 'relative'}}>
-                        <img style={{width: '100%'}} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
+                        <img style={{width: '100%'}} src={`https://ancient-bastion-21512.herokuapp.com/${video.thumbnail}`} alt="thumbnail" />
                             <div className="duration">
                                 <span>{minutes}분 {seconds}초</span>
                             </div>

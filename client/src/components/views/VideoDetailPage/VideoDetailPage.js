@@ -49,7 +49,7 @@ function VideoDetailPage(props) {
             <Row gutter={[16,16]}>
                 <Col lg={18} xs={24}>
                     <div style={{width: '100%', padding:'3rem 4rem'}}>
-                        <video style={{width: '100%'}} src={`http://localhost:5000/${VideoDetail.filePath}`} controls />
+                        <video style={{width: '100%'}} src={`https://ancient-bastion-21512.herokuapp.com/${VideoDetail.filePath}`} controls />
                         
                         <List.Item
                             actions= {[<LikeDislikes video userId={localStorage.getItem('userId')} videoId={videoId} writerId={VideoDetail.writer._id}/>,subscribeButton]}>

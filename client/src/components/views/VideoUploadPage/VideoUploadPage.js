@@ -138,7 +138,7 @@ function VideoUploadPage(props){
 
                     {ThumbnailPath && 
                     <div>
-                        <img src={`http://localhost:5000/${ThumbnailPath}`} alt="thumbnail" />
+                        <img src={`https://ancient-bastion-21512.herokuapp.com/${ThumbnailPath}`} alt="thumbnail" />
 
                     </div>
                     }
