@@ -63,7 +63,7 @@ function LikeDislikes(props) {
                     Axios.post('/api/like/upLike', variable)
                     .then(response => {
                         if(response.data.success){
-                            console.log(user.userData._id, props.writerId)
+                            // console.log(user.userData._id, props.writerId)
                             setLikes(Likes + 1)
                             setLikeAction('liked')
                             if(DisLikeAction !== null) {
