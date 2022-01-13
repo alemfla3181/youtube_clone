@@ -76,8 +76,6 @@ function VideoUploadPage(props){
                         alert('썸네일 생성에 실패 했습니다.')
                     }
                 })
-
-
             }else{
                 alert('비디오 업로드를 실패했습니다.')
             }
