@@ -101,7 +101,6 @@ function LandingPage() {
             </div>
             <Row gutter={[32, 16]}>
                 {renderCards}
-                
             </Row>
         </div>
     )
