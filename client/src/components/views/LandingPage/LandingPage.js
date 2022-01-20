@@ -94,7 +94,6 @@ function LandingPage() {
 
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
-            
             <Title level={2}> Recommended </Title>
             <div style={{marginTop: '20px', marginBottom:'20px'}}> 
                 <SearchFeature refreshFunction={updateSearchTerm} />
