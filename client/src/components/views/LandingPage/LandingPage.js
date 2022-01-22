@@ -91,6 +91,7 @@ function LandingPage() {
                 </Col>
                 
     })
+    
 
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
