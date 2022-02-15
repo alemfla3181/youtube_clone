@@ -18,7 +18,7 @@ const CategoryOptions = [
     {value: 1, label: "Autos & Vehicles"},
     {value: 2, label: "Music"},
     {value: 3, label: "Pets & Animals"},
-    {value: 4, label: "Sports"}
+    {value: 4, label: "Sports"},
 ]
 
 
@@ -169,9 +169,8 @@ function VideoUploadPage(props){
 
                 <select onChange={onCategoryChange}>
                     {CategoryOptions.map((item, index)=>(
-                        <option key={index} value={item.label}>{item.label}</option>
+                        <option key={index} value={item.value}>{item.label}</option>
                     ))}
-                    <option key value></option>
                 </select>
                 <br />
                 <br />
