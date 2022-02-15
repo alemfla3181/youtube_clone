@@ -142,7 +142,7 @@ router.post('/thumbnail', (req, res) => {
         return res.json({success: false, err});
     })
     .screenshot({
-        count: 3,
+        count: 2,
         folder: 'uploads/thumbnails',
         size: '320x240',
         filename: 'thumbnail-%b.png'
