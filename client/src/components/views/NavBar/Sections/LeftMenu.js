@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 function LeftMenu(props) {
     const user = useSelector(state => state.user)
@@ -9,10 +10,10 @@ function LeftMenu(props) {
         return (
             <Menu mode={props.mode}>
                 <Menu.Item key="home">
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                 </Menu.Item>
                 <Menu.Item key="subscription">
-                    <a href="/subscription">Subscription</a>
+                    <Link to="/subscription">Subscription</Link>
                 </Menu.Item>
             </Menu>
         )
@@ -20,7 +21,7 @@ function LeftMenu(props) {
         return (
             <Menu mode={props.mode}>
                 <Menu.Item key="home">
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                 </Menu.Item>
             </Menu>
         )

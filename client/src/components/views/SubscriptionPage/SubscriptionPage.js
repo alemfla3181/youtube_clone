@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import {Card, Icon, Avatar, Col, Typography, Row} from 'antd';
 import React,{useEffect,useState} from 'react'
-import { FaCode } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 const {Title} = Typography;
@@ -34,14 +34,14 @@ function SubscriptionPage() {
         var seconds = Math.floor((video.duration - minutes * 60));
 
         return  <Col key={index} lg={6} md={8} xs={24}>
-                    <a href={`/video/${video._id}`}>
+                    <Link to={`/video/${video._id}`}>
                         <div style={{position: 'relative'}}>
                             <img style={{width: '100%'}} src={`https://ancient-bastion-21512.herokuapp.com/${video.thumbnail}`} alt="thumbnail" />
                             <div className="duration">
                                 <span>{minutes}분 {seconds}초</span>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                     <br />
                     <Meta
                         avatar={

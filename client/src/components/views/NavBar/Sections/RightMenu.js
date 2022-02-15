@@ -3,7 +3,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 function RightMenu(props) {
@@ -23,10 +23,10 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="signin">
-          <a href="/login">Signin</a>
+          <Link to="/login">Signin</Link>
         </Menu.Item>
         <Menu.Item key="signup">
-          <a href="/register">Signup</a>
+          <Link to="/register">Signup</Link>
         </Menu.Item>
       </Menu>
     )
@@ -34,7 +34,7 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="upload">
-          <a href="/video/upload">Video</a>
+          <Link to="/video/upload">Video</Link>
         </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>
