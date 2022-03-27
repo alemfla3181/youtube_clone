@@ -20,7 +20,7 @@ function NavBar() {
     return (
         <nav className="menu" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <div className="menu__logo">
-                <Link to="/"><img src='img.jpeg' width='100%'/></Link>
+                <Link to="/"><img className='icon' src='img/youtube.jpeg'/></Link>
             </div>
             <div className="menu__container">
                 <div className="menu_left">
