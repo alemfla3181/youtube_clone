@@ -2,8 +2,10 @@
 
 https://ancient-bastion-21512.herokuapp.com/
 
+기능
 - 로그인, 회원가입
-- 검색 기능
+- 검색
+- 코멘트, 구독, 좋아요
 - 업로드 기능(미구현)
 
 youtube clone
