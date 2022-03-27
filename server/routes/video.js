@@ -105,12 +105,18 @@ router.post('/removeVideo', (req, res)=> {
 })
 
 router.post('/getVideoDetail', (req, res) => {
-    Video.findOne({"_id": req.body.videoId})
-    .populate('writer')
-    .exec((err, VideoDetail)=> {
-        if(err) return res.status(400).send(err);
-        return res.status(200).json({success: true, VideoDetail})
-    })
+    Video.findOneAndUpdate(
+        { _id: req.body.videoId },
+        { $inc: { "views": 1 } },
+        { new: true }, (err, video) => {
+            Video.findOne({ "_id": req.body.videoId })
+                .populate('writer')
+                .exec((err, VideoDetail) => {
+                    if (err) return res.status(400).send(err);
+                    return res.status(200).json({ success: true, VideoDetail })
+                })
+        }
+    )
 })
 
 router.post('/thumbnail', (req, res) => {
